@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+	<definition name="login"
+		template="/WEB-INF/views/layout/layout_login.jsp">
+		<put-attribute name="body"
+			value="/WEB-INF/views/jsp/dang-nhap/login.jsp" />
+	</definition>
+
+	<definition name="send-verify-code" extends="login">
+		<put-attribute name="body"
+			value="/WEB-INF/views/jsp/dang-nhap/sendVerifyCode.jsp" />
+	</definition>
+
+	<definition name="sendPassword" extends="login">
+		<put-attribute name="body"
+			value="/WEB-INF/views/jsp/dang-nhap/sendPassword.jsp" />
+	</definition>
+
+	<definition name="sendPasswordSuccess" extends="login">
+		<put-attribute name="body"
+			value="/WEB-INF/views/jsp/dang-nhap/sendPasswordSuccess.jsp" />
+	</definition>
+
+	<definition name="index"
+		template="/WEB-INF/views/layout/layout.jsp">
+		<put-attribute name="header"
+			value="/WEB-INF/views/layout/header.jsp" />
+		<put-attribute name="menu"
+			value="/WEB-INF/views/layout/menu.jsp" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/layout/content-blank.jsp" />
+		<put-attribute name="footer"
+			value="/WEB-INF/views/layout/footer.jsp" />
+	</definition>
+
+	<definition name="thong-tin-tai-khoan" extends="index">
+		<put-attribute name="body"
+			value="/WEB-INF/views/jsp/thong-tin-tai-khoan/contentView.jsp" />
+	</definition>
+
+	<definition name="them-moi" extends="index">
+		<put-attribute name="body"
+			value="/WEB-INF/views/jsp/thong-tin-tai-khoan/contentInput.jsp" />
+	</definition>
+
+	<definition name="phuong-thuc-thanh-toan" extends="index">
+		<put-attribute name="body"
+			value="/WEB-INF/views/jsp/phuong-thuc-thanh-toan/contentView.jsp" />
+	</definition>
+</tiles-definitions>
