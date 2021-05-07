@@ -26,41 +26,42 @@
 					<div class="box-body">
 						<div class="form-group">
 							<div class="form-group">
-								<label for="productTitle">Loại Tài Khoản </label> 
-								<form:input class="form-control" type="text" id="productTitle" path = "productTitle" placeholder="Loại Tài Khoản"/>
+								<label >Loại Tài Khoản </label> 
+								<form:input class="form-control" type="text" path = "productTitle" placeholder="Loại Tài Khoản"/>
+								<form:errors path="productTitle" cssStyle="color: #ff0000;"/>
 							</div>
-							<label for="productCode">Mã Tài Khoản </label> 
+							<label>Mã Tài Khoản </label> 
 							<form:input path = "productCode" class="form-control" type="text" id="productCode" placeholder="Mã Tài Khoản"/>
 						</div>
 						<div class="form-group">
-							<label for="exampleInputPassword1">Cấp VIP Ingame </label>
+							<label>Cấp VIP Ingame </label>
 							<form:input path="productVipIngameLevel" type="text" class="form-control" id="productVipIngameLevel"
 								placeholder="Cấp VIP Ingame"/>
 						</div>
 						<div class="form-group">
-							<label for="productVipNumber">Số VIP </label>
+							<label>Số VIP </label>
 							<form:input path="productVipNumber"	type="text" class="form-control" id="productVipNumber"
 								placeholder="Số VIP"/>
 						</div>
 						<div class="form-group">
-							<label for="productInfo">Thông Tin Tài Khoản </label> 
+							<label>Thông Tin Tài Khoản </label> 
 							<form:input path="productInfo" type="text" class="form-control" id="productInfo"
 								placeholder="Thông Tin Tài Khoản"/>
 						</div>
 						<div class="form-group">
-							<label for="productPrice">Giá Tài Khoản </label>
+							<label>Giá Tài Khoản </label>
 							<form:input path="productPrice" type="text" class="form-control" id="productPrice"
 								placeholder="VND"/>
 						</div>
 						<div class="form-group">
-							<label for="productVipIngameImage">Ảnh VIP Ingame</label>
-							 <input type="file" name="productVipIngameImage">
+							<label>Ảnh VIP Ingame</label>
+							 <input type="file" name="ingameImagefile"/>
 						</div>
 						<div class="form-group">
-							<label for="productImage">Ảnh Tài Khoản</label>
+							<label>Ảnh Tài Khoản</label>
 							<div class="container my-4" style="width: auto">
 								<div class="file-loading">
-									<input id="productImage" name="productImage" type="file" multiple>
+									<input id="productImage" name="productImageFile" type="file" multiple>
 								</div>
 							</div>
 						</div>
@@ -75,8 +76,6 @@
 				</form:form>
 			</div>
 			<!-- /.box -->
-
-
 		</div>
 		<!--/.col (right) -->
 	</div>
