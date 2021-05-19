@@ -49,7 +49,7 @@ public class ProductBusinessImpl implements ProductBusiness {
 	@Override
 	public ProductBO getProductBykey(String productCode) throws LogicException {
 		// creat list product object
-		Tblproduct tblproduct = new Tblproduct();
+		List<Tblproduct> tblproduct = new ArrayList<Tblproduct>();
 		try {
 			// lay thong tin product
 			tblproduct = productDao.queryProductByKey(productCode);
@@ -67,7 +67,7 @@ public class ProductBusinessImpl implements ProductBusiness {
 			throw new LogicException(ExceptionID.MPD001);
 		}
 		ProductBO productBO = new ProductBO();
-		productBO = setValueproductBO(tblproduct);
+		productBO = setValueproductBO(tblproduct.get(0));
 		return productBO;
 	}
 
@@ -75,16 +75,34 @@ public class ProductBusinessImpl implements ProductBusiness {
 	public int insertProduct(ProductBO productBO) throws LogicException {
 		int insertFlag = 0;
 
+		// kiem tra su ton tai cua product
+		List<Tblproduct> tblproduct = new ArrayList<Tblproduct>();
+		try {
+			// lay thong tin product
+			tblproduct = productDao.queryProductByKey(productBO.getProductCode());
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		if (tblproduct.size() > 0) {
+			Utils utils = new Utils();
+			Exception ex = utils.getLogicException(null, ExceptionID.EPD002);
+
+			// thuc hien ghi log
+			logger.error("phát sinh DuplicationException", ex);
+			throw new LogicException(ExceptionID.MPD002);
+		}
+
 		try {
 			insertFlag = productDao.insertProduct(productBO);
 			insertFlag = 1;
 		} catch (Exception e) {
 			Utils utils = new Utils();
-			Exception ex = utils.getLogicException(e, ExceptionID.EPD002);
+			Exception ex = utils.getLogicException(e, ExceptionID.EPD003);
 
 			// thuc hien ghi log
-			logger.error("phát sinh DuplicationException", ex);
-			throw new LogicException(ExceptionID.MPD002);
+			logger.error("insert data không thành công ", ex);
+			throw new LogicException(ExceptionID.MPD005);
 		}
 		return insertFlag;
 	}

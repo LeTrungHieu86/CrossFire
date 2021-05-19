@@ -8,7 +8,7 @@ import model.dao.daoentities.Tblproduct;;
 
 public interface ProductDao {
 	
-	public Tblproduct queryProductByKey(String productCode) throws SQLException;
+	public List<Tblproduct> queryProductByKey(String productCode) throws SQLException;
 	
 	public List<Tblproduct> queryAllProduct() throws SQLException;
 	

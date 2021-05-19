@@ -23,7 +23,7 @@ public class ProductDaoImpl implements ProductDao {
 	public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
 		this.jdbcTemplate = jdbcTemplate;
 	}
-	
+
 	@Override
 	public List<Tblproduct> queryAllProduct() throws SQLException {
 
@@ -38,7 +38,7 @@ public class ProductDaoImpl implements ProductDao {
 		sql.append(" GROUP BY PRODUCT_CODE ");
 		List<Tblproduct> tblProduct = new ArrayList<Tblproduct>();
 		try {
-			tblProduct = jdbcTemplate.query(sql.toString(), new ProductRowMapper());
+			tblProduct = jdbcTemplate.query(sql.toString(), new ProductRowMapperGetAll());
 		} catch (Exception e) {
 			tblProduct = null;
 		}
@@ -46,7 +46,7 @@ public class ProductDaoImpl implements ProductDao {
 	}
 
 	@Override
-	public Tblproduct queryProductByKey(String productCode) throws SQLException {
+	public List<Tblproduct> queryProductByKey(String productCode) throws SQLException {
 
 		StringBuilder sql = new StringBuilder();
 
@@ -59,9 +59,9 @@ public class ProductDaoImpl implements ProductDao {
 		sql.append(" WHERE PRODUCT_CODE = ?");
 
 		Object[] sqlParameter = { productCode };
-		Tblproduct tblProduct = new Tblproduct();
+		List<Tblproduct> tblProduct = new ArrayList<Tblproduct>();
 		try {
-			tblProduct = jdbcTemplate.queryForObject(sql.toString(), sqlParameter, new ProductRowMapper());
+			tblProduct = jdbcTemplate.query(sql.toString(), sqlParameter, new ProductRowMapper());
 		} catch (Exception e) {
 			tblProduct = null;
 		}
@@ -151,7 +151,7 @@ public class ProductDaoImpl implements ProductDao {
 		return jdbcTemplate.update(sql.toString(), sqlParameter, argType);
 	}
 
-	class ProductRowMapper implements RowMapper<Tblproduct> {
+	class ProductRowMapperGetAll implements RowMapper<Tblproduct> {
 
 		@Override
 		public Tblproduct mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -175,6 +175,35 @@ public class ProductDaoImpl implements ProductDao {
 			tblproduct.setProductDeleteFlag(rs.getBoolean("PRODUCT_DELETE_FLAG"));
 			tblproduct.setProductDeleteFlag(rs.getBoolean("PRODUCT_DELETE_FLAG"));
 			tblproduct.setCount(rs.getInt("COUNT"));
+
+			return tblproduct;
+		}
+	}
+
+	class ProductRowMapper implements RowMapper<Tblproduct> {
+
+		@Override
+		public Tblproduct mapRow(ResultSet rs, int rowNum) throws SQLException {
+
+			Tblproduct tblproduct = new Tblproduct();
+			TblproductId tblproductId = new TblproductId();
+			tblproductId.setProductCode(rs.getString("PRODUCT_CODE"));
+			tblproductId.setProductImageId(rs.getInt("PRODUCT_IMAGE_ID"));
+			tblproduct.setId(tblproductId);
+			tblproduct.setProductTitle(rs.getString("PRODUCT_TITLE"));
+			tblproduct.setProductVipIngameLevel(rs.getInt("PRODUCT_VIP_INGAME_LEVEL"));
+			tblproduct.setProductVipNumber(rs.getInt("PRODUCT_VIP_NUMBER"));
+			tblproduct.setProductInfo(rs.getString("PRODUCT_INFO"));
+			tblproduct.setProductVipIngameImage(rs.getString("PRODUCT_VIP_INGAME_IMAGE"));
+			tblproduct.setProductImage(rs.getString("PRODUCT_IMAGE"));
+			tblproduct.setProductPrice(rs.getInt("PRODUCT_PRICE"));
+			tblproduct.setProductUserAdd(rs.getString("PRODUCT_USER_ADD"));
+			tblproduct.setProductUserUpdate(rs.getString("PRODUCT_USER_UPDATE"));
+			tblproduct.setProductCreateDate(rs.getString("PRODUCT_CREATE_DATE"));
+			tblproduct.setProductUpdateDate(rs.getString("PRODUCT_UPDATE_DATE"));
+			tblproduct.setProductDeleteFlag(rs.getBoolean("PRODUCT_DELETE_FLAG"));
+			tblproduct.setProductDeleteFlag(rs.getBoolean("PRODUCT_DELETE_FLAG"));
+
 			return tblproduct;
 		}
 

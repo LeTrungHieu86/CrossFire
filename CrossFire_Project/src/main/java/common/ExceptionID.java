@@ -12,14 +12,17 @@ public class ExceptionID {
 	public static String EPD001 = "EPD001";
 	public static String MPD001 = "MPD001";
 	public static String EPD002 = "EPD002";
+	public static String EPD003 = "EPD003";
 	public static String MPD002 = "MPD002";
 	public static String MPD003 = "MPD003";
 	public static String MPD004 = "MPD004";
+	public static String MPD005 = "MPD005";
 	public static String EWL001 = "EWL001";
 	public static String MWL001 = "MWL001";
 	public static String EWL002 = "EWL002";
 	public static String MWL002 = "MWL002";
 	public static String MWL003 = "MWL003";
 	public static String MWL004 = "MWL004";
-
+	public static String SH0001 = "SH0001";
+	public static String MSH0001 = "MSH0001";
 }

@@ -1,5 +1,4 @@
-<%@page language="java" pageEncoding="UTF-8"
-	contentType="text/html;charset=UTF-8"%>
+<%@page language="java" pageEncoding="UTF-8" contentType="text/html;charset=UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
@@ -22,46 +21,75 @@
 			<!-- general form elements -->
 			<div class="box box-primary">
 				<!-- form start -->
-				<form:form role="form" action="${pageContext.request.contextPath}/trang-chu/thong-tin-tai-khoan/them-moi" modelAttribute="product" enctype="multipart/form-data">
+				<form:form role="form"
+					action="${pageContext.request.contextPath}/trang-chu/thong-tin-tai-khoan/them-moi"
+					modelAttribute="product" enctype="multipart/form-data">
+					<c:if test="${not empty ErrorMesage}">
+						<div style="text-align: center;background-color: #b33030; margin:10px;border-radius: 5px;"> 
+							<label style="margin-bottom: 10px;margin-top: 10px; text-align: center; color: 
+							white; padding:5px">
+								${ErrorMesage}</label></div>
+					</c:if>
+					<c:if test="${not empty SuccessMesage}">
+						<div style="text-align: center;background-color: green; margin:10px;border-radius: 5px;"> 
+							<label style="margin-bottom: 10px;margin-top: 10px; text-align: center; color: 
+							white; padding:5px">
+								${SuccessMesage}</label></div>
+					</c:if>
 					<div class="box-body">
 						<div class="form-group">
 							<div class="form-group">
-								<label >Loại Tài Khoản </label> 
-								<form:input class="form-control" type="text" path = "productTitle" placeholder="Loại Tài Khoản"/>
-								<form:errors path="productTitle" cssStyle="color: #ff0000;"/>
+								<label>Loại Tài Khoản </label>
+								<form:input class="form-control" type="text" path="productTitle"
+									placeholder="Loại Tài Khoản" required="required" maxlength="25" />
+								<form:errors path="productTitle" cssStyle="color: #ff0000;" />
 							</div>
-							<label>Mã Tài Khoản </label> 
-							<form:input path = "productCode" class="form-control" type="text" id="productCode" placeholder="Mã Tài Khoản"/>
+							<label>Mã Tài Khoản </label>
+							<form:input path="productCode" class="form-control" type="text"
+								id="productCode" placeholder="Mã Tài Khoản" required="required"
+								maxlength="10" />
+							<form:errors path="productCode" cssStyle="color: #ff0000;" />
 						</div>
 						<div class="form-group">
 							<label>Cấp VIP Ingame </label>
-							<form:input path="productVipIngameLevel" type="text" class="form-control" id="productVipIngameLevel"
-								placeholder="Cấp VIP Ingame"/>
+							<form:input path="productVipIngameLevel" type="number"
+								pattern="/^-?\d+\.?\d*$/"
+								onKeyPress="if(this.value.length==2) return false;" min="0"
+								class="form-control" id="productVipIngameLevel"
+								placeholder="Cấp VIP Ingame" />
 						</div>
 						<div class="form-group">
 							<label>Số VIP </label>
-							<form:input path="productVipNumber"	type="text" class="form-control" id="productVipNumber"
-								placeholder="Số VIP"/>
+							<form:input path="productVipNumber" type="number"
+								pattern="/^-?\d+\.?\d*$/"
+								onKeyPress="if(this.value.length==2) return false;" min="0"
+								class="form-control" id="productVipNumber" placeholder="Số VIP" />
 						</div>
 						<div class="form-group">
-							<label>Thông Tin Tài Khoản </label> 
-							<form:input path="productInfo" type="text" class="form-control" id="productInfo"
-								placeholder="Thông Tin Tài Khoản"/>
+							<label>Thông Tin Tài Khoản </label>
+							<form:input path="productInfo" type="text" class="form-control"
+								id="productInfo" placeholder="Thông Tin Tài Khoản"
+								required="required" />
+							<form:errors path="productInfo" cssStyle="color: #ff0000;" />
 						</div>
 						<div class="form-group">
 							<label>Giá Tài Khoản </label>
-							<form:input path="productPrice" type="text" class="form-control" id="productPrice"
-								placeholder="VND"/>
+							<form:input path="productPrice" type="number" pattern="/^-?\d+\.?\d*$/"
+								 min="0" class="form-control"
+								id="productPrice" placeholder="VND" />
+							<form:errors path="productPrice" cssStyle="color: #ff0000;" />
 						</div>
 						<div class="form-group">
-							<label>Ảnh VIP Ingame</label>
-							 <input type="file" name="ingameImagefile"/>
+							<label>Ảnh VIP Ingame</label> <input type="file"
+								name="ingameImagefile" />
 						</div>
 						<div class="form-group">
 							<label>Ảnh Tài Khoản</label>
 							<div class="container my-4" style="width: auto">
 								<div class="file-loading">
-									<input id="productImage" name="productImageFile" type="file" multiple>
+									<input id="productImage" name="productImageFile" type="file"
+										multiple>
+									<form:errors path="productImage" cssStyle="color: #ff0000;" />
 								</div>
 							</div>
 						</div>

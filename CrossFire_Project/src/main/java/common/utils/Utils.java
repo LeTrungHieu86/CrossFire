@@ -1,6 +1,9 @@
 package common.utils;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -9,6 +12,12 @@ import java.util.List;
 import java.util.Properties;
 import java.util.Random;
 import java.util.function.Consumer;
+
+import org.apache.log4j.Logger;
+import org.springframework.web.multipart.MultipartFile;
+
+import common.ExceptionID;
+import common.LogicException;
 
 public class Utils {
 
@@ -19,6 +28,7 @@ public class Utils {
 	private static final String ALPHA_NUMERIC = alpha + alphaUpperCase + digits;
 	private static final String ALL = alpha + alphaUpperCase + digits + specials;
 	private static Random generator = new Random();
+	private static final Logger logger = Logger.getLogger(Utils.class);
 
 	public static boolean isValidEmail(String email) {
 
@@ -89,10 +99,10 @@ public class Utils {
 			e1.printStackTrace();
 		}
 
-		if(e == null) {
+		if (e == null) {
 			e = new Exception("");
 		}
-		
+
 		// tao noi dung message.
 		if (e.getMessage().isEmpty()) {
 			logicException = new Exception(exceptionID + " " + messageLog + "\n");
@@ -102,5 +112,33 @@ public class Utils {
 
 		return logicException;
 	}
-	
+
+	// upload image
+	public static String uploadFile(File uploadFileDir, MultipartFile file) throws LogicException {
+
+		// get file name.
+		String nameFile = file.getOriginalFilename();
+		String pathfile = "";
+		if (nameFile != null && nameFile.length() > 0) {
+			pathfile = uploadFileDir.getAbsolutePath() + File.separator + nameFile;
+			File serverFileIngame = new File(pathfile);
+
+			// luong ghi du lieu vao file tren server
+			try {
+				BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(serverFileIngame));
+				stream.write(file.getBytes());
+				stream.close();
+			} catch (Exception e) {
+				Utils utils = new Utils();
+				Exception ex = utils.getLogicException(null, ExceptionID.SH0001);
+				// thực hiện ghi log.
+				logger.error("upload file không thành công", ex);
+
+				throw new LogicException(ExceptionID.MSH0001);
+			}
+		}
+
+		return pathfile;
+	}
+
 }

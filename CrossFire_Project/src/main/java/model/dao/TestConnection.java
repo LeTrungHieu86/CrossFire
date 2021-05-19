@@ -55,22 +55,22 @@ public class TestConnection {
 //		productBO.setProductUpdateDate(date);
 		productBO.setDeleteFlg(false);
 
-		try {
-			// int i = productDao.insertProduct(productBO);
-			// int i = productDao.updateProduct(productBO);
-			// int i = productDao.updateProduct(productBO);
-			// int i = productDao.deleteProduct(productBO);
-			// System.out.println(i);
-
-			Tblproduct tt = new Tblproduct();
-			tt = productDao.queryProductByKey("");
-
-//				System.out.println(tblproduct.getProductInfo());
-			
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+//		try {
+//			// int i = productDao.insertProduct(productBO);
+//			// int i = productDao.updateProduct(productBO);
+//			// int i = productDao.updateProduct(productBO);
+//			// int i = productDao.deleteProduct(productBO);
+//			// System.out.println(i);
+//
+//			Tblproduct tt = new Tblproduct();
+//			tt = productDao.queryProductByKey("");
+//
+////				System.out.println(tblproduct.getProductInfo());
+//			
+//		} catch (SQLException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 
 		WalletDao walletDao = (WalletDao) ctx.getBean("walletdao");
 		WalletBO walletBO = new WalletBO();

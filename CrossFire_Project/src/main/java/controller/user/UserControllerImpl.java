@@ -32,7 +32,7 @@ import model.business.user.UserBusiness;
 import model.business.user.UserBusinessImpl;
 
 @Controller
-public class UserControllerImpl {
+public class UserControllerImpl{
 
 	private static final int NUMBER_OF_CHARACTOR = 6;
 	private static final Logger logger = Logger.getLogger(UserControllerImpl.class);
@@ -310,4 +310,5 @@ public class UserControllerImpl {
 
 		return mav;
 	}
+
 }

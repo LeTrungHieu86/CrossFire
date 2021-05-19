@@ -17,18 +17,28 @@ public class ProductFormValidator implements Validator {
 
 	@Override
 	public void validate(Object target, Errors errors) {
-
-		ProductBO productBO = (ProductBO)target;
 		
-		// validate 
-		if(productBO.getProductTitle().isEmpty()) {
-//			ValidationUtils.rejectIfEmptyOrWhitespace(errors, "productTitle","Vui lòng nhập loại tài khoản.");
-			errors.rejectValue("productTitle", "Vui lòng nhập loại tài khoản.");
+		ProductBO productBO = (ProductBO) target;
+		// validate productTile
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "productTitle","valid.productTile");
+		if(productBO.getProductTitle().length() > 25) {
+			
+			errors.rejectValue("productTitle","valid.productTileLength");
 		}
 		
-//		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "productCode", "Vui lòng nhập mã tài khoản.");
-//		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "productInfo", "Vui lòng nhập thông tin tài khoản.");
-//		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "productPrice", "Vui lòng nhập giá tài khoản.");
-//		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "productImage", "Vui lòng chọn ảnh tài khoản.");
+		// validate product Code
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "productCode", "valid.productCode");
+		if(productBO.getProductCode().length() > 10) {
+			errors.rejectValue("productCode","valid.productCodeLength");
+		}
+		
+		// validate productInfo
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "productInfo", "valid.productInfo");
+		if(productBO.getProductInfo().length() > 200) {
+			errors.rejectValue("productInfo","valid.productInfoLength");
+		}
+		
+		
+		
 	}
 }
