@@ -21,7 +21,7 @@
 			<!-- general form elements -->
 			<div class="box box-primary">
 				<!-- form start -->
-				<form:form role="form"
+				<form:form role="form" id = "formAccountInfor"
 					action="${pageContext.request.contextPath}/trang-chu/thong-tin-tai-khoan/them-moi"
 					modelAttribute="product" enctype="multipart/form-data">
 					<c:if test="${not empty ErrorMesage}">
@@ -41,13 +41,13 @@
 							<div class="form-group">
 								<label>Loại Tài Khoản </label>
 								<form:input class="form-control" type="text" path="productTitle"
-									placeholder="Loại Tài Khoản" required="required" maxlength="25" />
+									placeholder="Loại Tài Khoản" required="required" maxlength="25" value = "${productTitle}"/>
 								<form:errors path="productTitle" cssStyle="color: #ff0000;" />
 							</div>
 							<label>Mã Tài Khoản </label>
 							<form:input path="productCode" class="form-control" type="text"
 								id="productCode" placeholder="Mã Tài Khoản" required="required"
-								maxlength="10" />
+								maxlength="10" value = "${productCode}"/>
 							<form:errors path="productCode" cssStyle="color: #ff0000;" />
 						</div>
 						<div class="form-group">
@@ -56,40 +56,39 @@
 								pattern="/^-?\d+\.?\d*$/"
 								onKeyPress="if(this.value.length==2) return false;" min="0"
 								class="form-control" id="productVipIngameLevel"
-								placeholder="Cấp VIP Ingame" />
+								placeholder="Cấp VIP Ingame" value = "${productVipIngameLevel}" />
 						</div>
 						<div class="form-group">
 							<label>Số VIP </label>
 							<form:input path="productVipNumber" type="number"
 								pattern="/^-?\d+\.?\d*$/"
 								onKeyPress="if(this.value.length==2) return false;" min="0"
-								class="form-control" id="productVipNumber" placeholder="Số VIP" />
+								class="form-control" id="productVipNumber" placeholder="Số VIP" value = "${productVipNumber}" />
 						</div>
 						<div class="form-group">
 							<label>Thông Tin Tài Khoản </label>
 							<form:input path="productInfo" type="text" class="form-control"
-								id="productInfo" placeholder="Thông Tin Tài Khoản"
-								required="required" />
+								id="productInfo1" placeholder="Thông Tin Tài Khoản"
+								required="required" value = "${productInfo}"/>
 							<form:errors path="productInfo" cssStyle="color: #ff0000;" />
 						</div>
 						<div class="form-group">
 							<label>Giá Tài Khoản </label>
 							<form:input path="productPrice" type="number" pattern="/^-?\d+\.?\d*$/"
 								 min="0" class="form-control"
-								id="productPrice" placeholder="VND" />
+								id="productPrice" placeholder="VND" value = "${productPrice}" />
 							<form:errors path="productPrice" cssStyle="color: #ff0000;" />
 						</div>
 						<div class="form-group">
 							<label>Ảnh VIP Ingame</label> <input type="file"
-								name="ingameImagefile" />
+								name="ingameImagefile" value = "${ingameImagefile}"/>
 						</div>
 						<div class="form-group">
 							<label>Ảnh Tài Khoản</label>
 							<div class="container my-4" style="width: auto">
-								<div class="file-loading">
+								<div class="file-loading" style="width: 100%; height: 10px">
 									<input id="productImage" name="productImageFile" type="file"
-										multiple>
-									<form:errors path="productImage" cssStyle="color: #ff0000;" />
+										multiple required="required" value = "${productImage}">
 								</div>
 							</div>
 						</div>
@@ -97,9 +96,10 @@
 					<!-- /.box-body -->
 
 					<div class="box-footer">
-						<button type="submit" class="btn btn-primary">Đăng ký</button>
-						<!-- <button type="submit" class="btn btn-primary">Nhập Lại</button>
-						<button type="submit" class="btn btn-primary">Quay lại</button> -->
+						<button type="submit" class="btn btn-primary" name="insert" value="insert">Đăng ký</button>
+						<button type="reset" class="btn btn-primary">Nhập Lại</button>
+						<button type="submit" class="btn btn-primary" name="comeback" value="comeback">Quay lại</button>
+	
 					</div>
 				</form:form>
 			</div>
@@ -109,4 +109,6 @@
 	</div>
 	<!-- /.row -->
 </section>
+
+>
 <!-- /.content -->

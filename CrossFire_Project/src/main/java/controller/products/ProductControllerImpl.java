@@ -1,6 +1,7 @@
 package controller.products;
 
 import java.io.File;
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -96,7 +97,7 @@ public class ProductControllerImpl {
 		return new ModelAndView("them-moi");
 	}
 
-	@PostMapping(value = { "/thong-tin-tai-khoan/them-moi" })
+	@PostMapping(value = { "/thong-tin-tai-khoan/them-moi" }, params = "insert")
 	public ModelAndView acountCFInsert(@RequestParam("ingameImagefile") MultipartFile productVipIngameImage,
 			@RequestParam("productImageFile") MultipartFile[] productImage,
 			@ModelAttribute("product") @Valid ProductBO productBO, BindingResult result, ModelMap model,
@@ -117,6 +118,7 @@ public class ProductControllerImpl {
 		} else {
 			try {
 
+				
 				// get current date time
 				LocalDateTime now = LocalDateTime.now();
 				DateTimeFormatter dateTimeFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
@@ -150,12 +152,30 @@ public class ProductControllerImpl {
 				Utils utils = new Utils();
 				Exception ex = utils.getLogicException(null, e.getErrorCode());
 				redirAtt.addFlashAttribute("ErrorMesage", ex.getMessage());
+				redirAtt.addFlashAttribute("productTitle", productBO.getProductTitle());
+				redirAtt.addFlashAttribute("productCode", productBO.getProductCode());
+				redirAtt.addFlashAttribute("productVipIngameLevel", productBO.getProductVipIngameLevel());
+				redirAtt.addFlashAttribute("productVipNumber", productBO.getProductVipNumber());
+				redirAtt.addFlashAttribute("productInfo", productBO.getProductInfo());
+				redirAtt.addFlashAttribute("productPrice", productBO.getProductPrice());
 				redirAtt.addFlashAttribute("SuccessMesage", "");
 				return new ModelAndView("redirect:/trang-chu/thong-tin-tai-khoan/them-moi");
 			}
 		}
 
 		return new  ModelAndView("redirect:/trang-chu/thong-tin-tai-khoan/them-moi");
+	}
+	
+	@PostMapping(value = { "/thong-tin-tai-khoan/them-moi" }, params = "comeback")
+	public ModelAndView comeback(ModelMap model, HttpServletRequest request, HttpSession session,
+			RedirectAttributes redirAtt) {
+		UserBO boSesson = (UserBO) request.getSession().getAttribute("userSession");
+		if (boSesson == null) {
+			model.addAttribute("user", new UserBO());
+			return new ModelAndView("redirect:/login");
+		}
+		
+		return new ModelAndView("redirect:/trang-chu/thong-tin-tai-khoan");
 	}
 
 	// upload
