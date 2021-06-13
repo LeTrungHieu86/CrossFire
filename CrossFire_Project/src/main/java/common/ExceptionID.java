@@ -25,4 +25,5 @@ public class ExceptionID {
 	public static String MWL004 = "MWL004";
 	public static String SH0001 = "SH0001";
 	public static String MSH0001 = "MSH0001";
+	public static String MSH0001 = "MSH00012";
 }
