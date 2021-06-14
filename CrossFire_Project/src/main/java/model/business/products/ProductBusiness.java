@@ -7,7 +7,9 @@ import model.bo.ProductBO;
 
 public interface ProductBusiness {
 	
-	public ProductBO getProductBykey(String productCode) throws LogicException;
+	public ProductBO getProductBykey(String productCode, int productImageId) throws LogicException;
+	
+	public List<ProductBO> getProductByCode(String productCode) throws LogicException;
 	
 	public List<ProductBO> getAllProduct() throws LogicException;
 	
@@ -15,6 +17,8 @@ public interface ProductBusiness {
 	
 	public int updateProduct(ProductBO productBO) throws LogicException;
 	
-	public int deleteProduct(ProductBO productBO) throws LogicException;
+	public int deleteProductByKey(String productCode, int productImageId) throws LogicException;
+	
+	public int deleteProductByCode(String productCode) throws LogicException;
 
 }

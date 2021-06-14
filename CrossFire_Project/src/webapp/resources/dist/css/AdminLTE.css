@@ -21,7 +21,6 @@ body {
 body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-weight: 400;
   overflow-x: hidden;
   overflow-y: auto;
@@ -1784,6 +1783,7 @@ a:focus {
   right: 0;
   min-width: 100%;
   min-height: 100%;
+  font-size: 100px;
   text-align: right;
   opacity: 0;
   filter: alpha(opacity=0);
@@ -4050,3 +4050,99 @@ Gradient Background colors
   opacity: 1;
   filter: alpha(opacity=100);
 }
+
+.file-preview {
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    padding: 8px;
+    width: 100%;
+    margin-bottom: 5px;
+}
+
+.file-drop-zone {
+    border: 1px dashed #aaa;
+    min-height: 260px;
+    border-radius: 4px;
+    text-align: center;
+    vertical-align: middle;
+    margin: 12px 15px 12px 12px;
+    padding: 5px;
+}
+
+.file-drop-zone .file-preview-thumbnails {cursor: default;}
+
+.theme-explorer-fas {
+    border: 1px solid #ddd;
+    margin: 2px 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.theme-explorer-fas .kv-file-content {
+    width: 160px;
+    height: 80px;
+    padding: 5px;
+    text-align: left;
+}
+
+.theme-explorer-fas .file-details-cell {
+    width: 60%;
+    font-size: 0.95rem;
+    text-align: left;
+    margin-right: auto;
+}
+
+.theme-explorer-fas .explorer-caption {
+    color: #777;
+    padding-top: 5px;
+}
+
+.theme-explorer-fas .file-actions-cell {
+    position: relative;
+    height: 80px;
+    width: 200px;
+}
+
+.theme-explorer-fas .file-actions{
+    text-align: center;
+}
+
+.theme-explorer-fas .file-footer-buttons {
+  text-align: right;
+    padding: 5px;
+}
+
+img {
+    vertical-align: middle;
+}
+
+img {
+    border: 0;
+}
+
+.file-preview-image {
+    font: 40px Impact, Charcoal, sans-serif;
+    color: #008000;
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+element.style {width: auto;height: auto;max-width: 100%;max-height: 100%;}
+
+.btn-default {
+    background-color: #f4f4f4;
+    color: #444;
+    border-color: #ddd;
+}
+
+.btn {
+    border-radius: 3px;
+    box-shadow: none;
+    border: 1px solid transparent;
+    border-color: #ddd;
+}
+

@@ -49,7 +49,8 @@
 	                 <td>${product.productPrice}</td>
 	                 <td>${product.count}</td>
 	                 <td>
-	                   <button type="submit" class="btn btn-info" onclick="/Them-moi">Chỉnh Sửa</button>
+	                 <spring:url value="/trang-chu/thong-tin-tai-khoan/chinh-sua?productCode=${product.productCode}" var="productInfoUrlUpdate" />
+	                   <button type="submit" class="btn btn-info" onclick="location.href='${productInfoUrlUpdate}'">Chỉnh Sửa</button>
 	                   <button type="button" class="btn btn-info" style="background-color: #dd4b39">Xóa</button>
 	                 </td>
 	               </tr>

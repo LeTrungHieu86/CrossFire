@@ -13,7 +13,7 @@
 	<mvc:resources mapping="/resources/**"
 		location="/resources/" cache-period="31556926" />
 
-	<mvc:resources mapping="/image/**" location="/image/" />
+	<mvc:resources mapping="/upload/**" location="/upload/" />
 
 	<!-- mapping các template tiles -->
 	<bean id="viewResolver"

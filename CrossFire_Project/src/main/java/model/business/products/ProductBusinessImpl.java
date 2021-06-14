@@ -45,14 +45,36 @@ public class ProductBusinessImpl implements ProductBusiness {
 
 		return listProductBO;
 	}
-
+	
 	@Override
-	public ProductBO getProductBykey(String productCode) throws LogicException {
+	public List<ProductBO> getProductByCode(String productCode) throws LogicException {
 		// creat list product object
 		List<Tblproduct> tblproduct = new ArrayList<Tblproduct>();
 		try {
 			// lay thong tin product
-			tblproduct = productDao.queryProductByKey(productCode);
+			tblproduct = productDao.queryProductByCode(productCode);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		List<ProductBO> listProductBO = new ArrayList<ProductBO>();
+		if (tblproduct.size() > 0) {
+			ProductBO productBO = new ProductBO();
+			for (int i = 0; i < tblproduct.size(); i++) {
+				productBO = setValueproductBO(tblproduct.get(i));
+				listProductBO.add(productBO);
+			}
+		}
+		return listProductBO;
+	}
+
+	@Override
+	public ProductBO getProductBykey(String productCode, int ProductImageId) throws LogicException {
+		// creat list product object
+		Tblproduct tblproduct = new Tblproduct();
+		try {
+			// lay thong tin product
+			tblproduct = productDao.queryProductByKey(productCode, ProductImageId);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -67,7 +89,7 @@ public class ProductBusinessImpl implements ProductBusiness {
 			throw new LogicException(ExceptionID.MPD001);
 		}
 		ProductBO productBO = new ProductBO();
-		productBO = setValueproductBO(tblproduct.get(0));
+		productBO = setValueproductBO(tblproduct);
 		return productBO;
 	}
 
@@ -76,15 +98,15 @@ public class ProductBusinessImpl implements ProductBusiness {
 		int insertFlag = 0;
 
 		// kiem tra su ton tai cua product
-		List<Tblproduct> tblproduct = new ArrayList<Tblproduct>();
+		Tblproduct tblproduct = new Tblproduct();
 		try {
 			// lay thong tin product
-			tblproduct = productDao.queryProductByKey(productBO.getProductCode());
+			tblproduct = productDao.queryProductByKey(productBO.getProductCode() , productBO.getProductImageId());
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 
-		if (tblproduct.size() > 0) {
+		if (tblproduct != null) {
 			Utils utils = new Utils();
 			Exception ex = utils.getLogicException(null, ExceptionID.EPD002);
 
@@ -126,11 +148,30 @@ public class ProductBusinessImpl implements ProductBusiness {
 	}
 
 	@Override
-	public int deleteProduct(ProductBO productBO) throws LogicException {
+	public int deleteProductByKey(String productCode, int productImageId) throws LogicException {
 		int deleteFlag = 0;
 
 		try {
-			deleteFlag = productDao.deleteProduct(productBO);
+			deleteFlag = productDao.deleteProductByKey(productCode,productImageId);
+			deleteFlag = 1;
+		} catch (Exception e) {
+			Utils utils = new Utils();
+			Exception ex = utils.getLogicException(e, ExceptionID.EPD001);
+
+			// thuc hien ghi log
+			logger.error("Phát sinh NotFoundException", ex);
+			throw new LogicException(ExceptionID.MPD004);
+		}
+		return deleteFlag;
+	}
+	
+
+	@Override
+	public int deleteProductByCode(String productCode) throws LogicException {
+		int deleteFlag = 0;
+
+		try {
+			deleteFlag = productDao.deleteProductByCode(productCode);
 			deleteFlag = 1;
 		} catch (Exception e) {
 			Utils utils = new Utils();
@@ -165,5 +206,4 @@ public class ProductBusinessImpl implements ProductBusiness {
 
 		return productBO;
 	}
-
 }

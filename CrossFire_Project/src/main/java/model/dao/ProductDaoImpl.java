@@ -46,8 +46,30 @@ public class ProductDaoImpl implements ProductDao {
 	}
 
 	@Override
-	public List<Tblproduct> queryProductByKey(String productCode) throws SQLException {
+	public Tblproduct queryProductByKey(String productCode, int productImageId) throws SQLException {
 
+		StringBuilder sql = new StringBuilder();
+
+		sql.append("SELECT PRODUCT_CODE, PRODUCT_TITLE, PRODUCT_VIP_INGAME_LEVEL, ");
+		sql.append("       PRODUCT_VIP_NUMBER, PRODUCT_IMAGE_ID, PRODUCT_INFO, ");
+		sql.append("       PRODUCT_VIP_INGAME_IMAGE, PRODUCT_IMAGE, PRODUCT_PRICE, ");
+		sql.append("       PRODUCT_USER_ADD, PRODUCT_USER_UPDATE, PRODUCT_CREATE_DATE, ");
+		sql.append("       PRODUCT_UPDATE_DATE, PRODUCT_DELETE_FLAG ");
+		sql.append(" FROM TBLPRODUCT ");
+		sql.append(" WHERE PRODUCT_CODE = ?, PRODUCT_IMAGE_ID = ? ");
+
+		Object[] sqlParameter = { productCode, productImageId };
+		Tblproduct tblProduct = new Tblproduct();
+		try {
+			tblProduct = (Tblproduct) jdbcTemplate.query(sql.toString(), sqlParameter, new ProductRowMapper());
+		} catch (Exception e) {
+			tblProduct = null;
+		}
+		return tblProduct;
+	}
+
+	@Override
+	public List<Tblproduct> queryProductByCode(String productCode) throws SQLException {
 		StringBuilder sql = new StringBuilder();
 
 		sql.append("SELECT PRODUCT_CODE, PRODUCT_TITLE, PRODUCT_VIP_INGAME_LEVEL, ");
@@ -140,13 +162,25 @@ public class ProductDaoImpl implements ProductDao {
 	}
 
 	@Override
-	public int deleteProduct(ProductBO productBO) throws SQLException {
+	public int deleteProductByKey(String productCode, int productImageId) throws SQLException {
 		StringBuilder sql = new StringBuilder();
 		sql.append("DELETE FROM TBLPRODUCT ");
 		sql.append("       WHERE PRODUCT_CODE = ? AND PRODUCT_IMAGE_ID = ? ");
 
-		Object[] sqlParameter = { productBO.getProductCode(), productBO.getProductImageId() };
+		Object[] sqlParameter = { productCode, productImageId };
 		int[] argType = { Types.VARCHAR, Types.INTEGER };
+
+		return jdbcTemplate.update(sql.toString(), sqlParameter, argType);
+	}
+
+	@Override
+	public int deleteProductByCode(String productCode) throws SQLException {
+		StringBuilder sql = new StringBuilder();
+		sql.append("DELETE FROM TBLPRODUCT ");
+		sql.append("       WHERE PRODUCT_CODE = ? ");
+
+		Object[] sqlParameter = { productCode };
+		int[] argType = { Types.VARCHAR};
 
 		return jdbcTemplate.update(sql.toString(), sqlParameter, argType);
 	}
