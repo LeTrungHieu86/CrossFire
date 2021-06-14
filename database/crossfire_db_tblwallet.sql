@@ -1,0 +1,61 @@
+-- MySQL dump 10.13  Distrib 8.0.23, for Win64 (x86_64)
+--
+-- Host: localhost    Database: crossfire_db
+-- ------------------------------------------------------
+-- Server version	8.0.23
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!50503 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `tblwallet`
+--
+
+DROP TABLE IF EXISTS `tblwallet`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `tblwallet` (
+  `WALLET_ID` int unsigned NOT NULL AUTO_INCREMENT,
+  `WALLET_NAME` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  `WALLET_ACOUNT` varchar(15) COLLATE utf8_unicode_ci NOT NULL,
+  `WALLET_TITLE` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
+  `WALLET_BRANCH` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `WALLET_MASTER` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  `WALLET_IMAGE` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
+  `WALLET_USER_ADD` varchar(15) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `WALLET_USER_UPDATE` varchar(15) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `WALLET_CREATE_DATE` datetime DEFAULT NULL,
+  `WALLET_UPDATE_DATE` datetime DEFAULT NULL,
+  `WALLET_DELETE_FLAG` tinyint(1) DEFAULT NULL,
+  PRIMARY KEY (`WALLET_ID`,`WALLET_NAME`,`WALLET_ACOUNT`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tblwallet`
+--
+
+LOCK TABLES `tblwallet` WRITE;
+/*!40000 ALTER TABLE `tblwallet` DISABLE KEYS */;
+INSERT INTO `tblwallet` VALUES (1,'MoMo','0389576197','Ví điện tử','walletBranch','Lê Trung Hiếu','image1.jpg','admin','admin','2021-03-12 00:00:00','2021-03-12 00:00:00',0);
+/*!40000 ALTER TABLE `tblwallet` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2021-06-15  0:08:07
